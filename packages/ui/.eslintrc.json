@@ -1,0 +1,23 @@
+{
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:prettier/recommended",
+	],
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["react", "@typescript-eslint"],
+	"rules": {
+		"@typescript-eslint/no-empty-function": "off",
+		"@typescript-eslint/no-namespace": "off",
+		"react/display-name": "off",
+		"react/prop-types": "off",
+		"curly": "error"
+	},
+	"ignorePatterns": ["**/*.js"],
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
+}
