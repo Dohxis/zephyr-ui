@@ -1,0 +1,21 @@
+{
+	"private": true,
+	"workspaces": [
+		"packages/ui"
+	],
+	"scripts": {
+		"postinstall": "lerna bootstrap",
+		"build": "lerna run --stream build",
+		"start": "lerna run --stream start",
+		"lerna:publish": "lerna publish --no-git-tag-version --no-push"
+	},
+	"devDependencies": {
+		"lerna": "^6.3.0",
+		"prettier": "^2.8.1",
+		"typescript": "^4.9.4"
+	},
+	"prettier": {
+		"tabWidth": 4,
+		"useTabs": true
+	}
+}

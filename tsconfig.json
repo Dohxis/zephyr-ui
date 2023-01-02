@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"allowUnreachableCode": false,
+		"isolatedModules": true,
+		"declaration": false,
+		"lib": ["dom", "esnext", "dom.iterable"],
+		"moduleResolution": "node",
+		"module": "esnext",
+		"target": "esnext",
+		"jsx": "react-jsx"
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "dist"]
+}
