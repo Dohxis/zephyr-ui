@@ -8,13 +8,11 @@ export default {
 export const Text = () => (
 	<Example>
 		<ExampleItem title="Text Field">
-			<TextField name="object" placholder="Type..." />
+			<TextField name="name" placholder="Type..." />
 		</ExampleItem>
 
 		<ExampleItem title="Text Field + Title">
-			<TextField label="First name" name="firstName" />
-
-			<TextField label="Last name" name="lastName" />
+			<TextField label="Title" name="title" />
 		</ExampleItem>
 	</Example>
 );
