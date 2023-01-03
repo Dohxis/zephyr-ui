@@ -22,7 +22,7 @@
 	"repository": "https://github.com/Dohxis/zephyr-ui",
 	"scripts": {
 		"prepublishOnly": "yarn build",
-		"build": "yarn build:storybook && vite build",
+		"build": "yarn build:storybook",
 		"build:storybook": "yarn build:tailwind --minify && storybook build -o www --quiet",
 		"build:tailwind": "tailwind -i ./.storybook/index.css -o ./.storybook/index.generated.css",
 		"start": "concurrently -k \"yarn build:tailwind --watch\" \"storybook dev -p 6006 --quiet\"",
