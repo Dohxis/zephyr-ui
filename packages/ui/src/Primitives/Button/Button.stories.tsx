@@ -157,5 +157,11 @@ export const Button = () => (
 				Ghost button
 			</ButtonComponent>
 		</ExampleItem>
+
+		<ExampleItem title="Custom">
+			<ButtonComponent className="rounded-full bg-pink-600 hover:bg-pink-800">
+				Custom button
+			</ButtonComponent>
+		</ExampleItem>
 	</Example>
 );
