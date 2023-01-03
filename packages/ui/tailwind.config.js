@@ -1,16 +1,14 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss/tailwind-config').TailwindConfig} */
 module.exports = {
-	content: ['./src/**/*.{tsx,ts}'],
+	content: ["./src/**/*.{tsx,ts}"],
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Inter var', ...defaultTheme.fontFamily.sans]
-			}
-		}
+				sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+			},
+		},
 	},
-	plugins: [
-		require('@tailwindcss/forms'),
-	]
+	plugins: [require("@tailwindcss/forms")],
 };

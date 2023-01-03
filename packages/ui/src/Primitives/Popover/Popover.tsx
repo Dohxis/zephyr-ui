@@ -31,7 +31,7 @@ export const Popover: React.FunctionComponent<PopoverInterface> = ({
 				portal
 				state={popover}
 				className={classNames(
-					"rounded border border-gray-200 bg-white p-3 shadow-sm",
+					"rounded border border-gray-200 bg-white p-3 shadow-sm outline-none",
 					className
 				)}
 			>
