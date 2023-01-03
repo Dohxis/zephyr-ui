@@ -1,11 +1,26 @@
 import React from "react";
 import { classNames, ClassNameType } from "../../Utilities/ClassName";
+import { Spinner } from "../Spinner/Spinner";
+import { ButtonIcon } from "./ButtonIcon";
+import {
+	ButtonColorType,
+	ButtonSizeType,
+	ButtonVariantType,
+	BUTTON_DISABLED_CLASS_NAMES,
+	BUTTON_SIZE_CLASS_NAMES,
+	BUTTON_STYLE_CLASS_NAMES,
+} from "./ButtonStyle";
 
-interface ButtonInterface<AsType extends React.ElementType> {
+export interface ButtonInterface<AsType extends React.ElementType> {
 	as?: AsType;
 	className?: ClassNameType;
-	variant?: "solid" | "outline" | "ghost";
-	size?: "xs" | "sm" | "md" | "lg";
+	variant?: ButtonVariantType;
+	color?: ButtonColorType;
+	size?: ButtonSizeType;
+	disabled?: boolean;
+	icon?: React.ReactElement;
+	iconPosition?: "left" | "right";
+	loading?: boolean;
 	children?: React.ReactNode | React.ReactNode[];
 }
 
@@ -16,37 +31,64 @@ export const Button = <AsType extends React.ElementType = "button">({
 	as,
 	className,
 	variant = "solid",
+	color = "primary",
 	size = "sm",
+	disabled = false,
+	icon,
+	iconPosition = "left",
+	loading = false,
 	children,
 	...props
 }: PolymorphicButtonInterface<AsType>) => {
 	const ButtonComponent = as || "button";
 
-	const variantClassName = {
-		solid: "bg-indigo-600 hover:bg-indigo-800 text-white border-transparent",
-		outline:
-			"bg-white hover:bg-indigo-50 text-indigo-600 border-indigo-600",
-		ghost: "bg-transparent hover:bg-indigo-50 text-indigo-600 border-transparent",
-	}[variant];
+	const styleClassName = BUTTON_STYLE_CLASS_NAMES[color][variant];
 
-	const sizeClassName = {
-		xs: "px-[10px] py-[6px] text-xs leading-none",
-		sm: "px-[12px] py-[8px] text-sm leading-none",
-		md: "px-[14px] py-[10px] text-base leading-none",
-		lg: "px-[16px] py-[12px] text-lg leading-none",
-	}[size];
+	const sizeClassName = BUTTON_SIZE_CLASS_NAMES[size];
+
+	const disabledClassName = BUTTON_DISABLED_CLASS_NAMES[variant];
+
+	const computedIcon = loading && icon !== undefined ? <Spinner /> : icon;
+
+	const computedChildren =
+		loading && icon === undefined ? (
+			<>
+				<div
+					className={classNames(
+						"absolute inset-0 flex items-center justify-center transition duration-150"
+					)}
+				>
+					<ButtonIcon icon={<Spinner />} size={size} />
+				</div>
+				<div className="opacity-0">{children}</div>
+			</>
+		) : (
+			children
+		);
 
 	return (
 		<ButtonComponent
 			{...props}
+			disabled={disabled || loading}
 			className={classNames(
-				"flex items-center justify-center rounded border font-medium no-underline outline-none ring-offset-2 transition duration-150 focus:ring",
-				variantClassName,
+				"flex items-center justify-center rounded border font-medium leading-none no-underline outline-none ring-offset-2 transition duration-150 focus:ring",
+				!disabled && styleClassName,
+				disabled && "cursor-not-allowed",
+				disabled && disabledClassName,
+				loading && icon === undefined && "relative",
 				sizeClassName,
 				className
 			)}
 		>
-			{children}
+			{iconPosition === "left" && (
+				<ButtonIcon icon={computedIcon} size={size} className="mr-1" />
+			)}
+
+			{computedChildren}
+
+			{iconPosition === "right" && (
+				<ButtonIcon icon={computedIcon} size={size} className="ml-1" />
+			)}
 		</ButtonComponent>
 	);
 };
