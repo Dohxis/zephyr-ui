@@ -25,11 +25,15 @@
 		"build": "yarn build:storybook && vite build",
 		"build:storybook": "yarn build:tailwind --minify && storybook build -o www --quiet",
 		"build:tailwind": "tailwind -i ./.storybook/index.css -o ./.storybook/index.generated.css",
-		"start": "concurrently -k \"yarn build:tailwind --watch\" \"storybook dev --quiet\"",
+		"start": "concurrently -k \"yarn build:tailwind --watch\" \"storybook dev -p 6006 --quiet\"",
 		"lint": "eslint src",
 		"lint:fix": "eslint --fix src"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"ariakit": "^2.0.0-next.43",
+		"clsx": "^1.2.1",
+		"tailwind-merge": "^1.8.1"
+	},
 	"devDependencies": {
 		"@storybook/builder-vite": "^7.0.0-beta.19",
 		"@storybook/react": "^7.0.0-beta.19",
@@ -45,6 +49,8 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-react": "^7.28.0",
 		"eslint-plugin-storybook": "^0.6.4",
+		"prettier": "^2.8.1",
+		"prettier-plugin-tailwindcss": "^0.2.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"storybook": "^7.0.0-beta.19",
