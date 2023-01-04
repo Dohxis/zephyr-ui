@@ -33,6 +33,7 @@
 		"@heroicons/react": "^2.0.13",
 		"ariakit": "^2.0.0-next.43",
 		"clsx": "^1.2.1",
+		"framer-motion": "^8.1.6",
 		"tailwind-merge": "^1.8.1"
 	},
 	"devDependencies": {
