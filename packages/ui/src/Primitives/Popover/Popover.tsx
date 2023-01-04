@@ -35,6 +35,7 @@ interface PopoverInterface {
 	animation?: AnimationInterface;
 	transition?: Transition;
 	arrow?: boolean;
+	arrowSize?: number;
 	children?: React.ReactNode | React.ReactNode[];
 }
 
@@ -43,6 +44,7 @@ export const Popover: React.FunctionComponent<PopoverInterface> = ({
 	className,
 	arrowClassName,
 	arrow = false,
+	arrowSize = 30,
 	gutter = arrow ? 0 : 8,
 	placement = "bottom",
 	animation,
@@ -95,6 +97,7 @@ export const Popover: React.FunctionComponent<PopoverInterface> = ({
 						>
 							{arrow && (
 								<PopoverArrow
+									style={{ fontSize: arrowSize }}
 									className={classNames(
 										"-mb-px [&>svg]:fill-white [&>svg]:stroke-gray-200 [&>svg]:stroke-2",
 										arrowClassName
