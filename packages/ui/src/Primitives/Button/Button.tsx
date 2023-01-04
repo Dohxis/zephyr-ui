@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { classNames, ClassNameType } from "../../Utilities/ClassName";
 import { Spinner } from "../Spinner/Spinner";
 import { ButtonIcon } from "./ButtonIcon";
@@ -44,6 +44,12 @@ export const Button = React.forwardRef(
 		}: PolymorphicButtonInterface<AsType>,
 		ref: React.ForwardedRef<HTMLButtonElement>
 	) => {
+		const innerRef = useRef<HTMLButtonElement>(null);
+
+		useImperativeHandle(ref, () => innerRef.current as HTMLButtonElement);
+
+		const [loaderTextColor, setLoaderTextColor] = useState<string>();
+
 		const ButtonComponent = as || "button";
 
 		const styleClassName = BUTTON_STYLE_CLASS_NAMES[color][variant];
@@ -54,17 +60,33 @@ export const Button = React.forwardRef(
 
 		const computedIcon = loading && icon !== undefined ? <Spinner /> : icon;
 
+		// We hide the text when there is no icon and the button is loading,
+		// but to prevent the loader to also become transparent we first
+		// save the current color and then apply it to the loader
+		useEffect(() => {
+			if (!loading) {
+				setLoaderTextColor(undefined);
+			}
+
+			if (loading && innerRef.current) {
+				const refStyle = window.getComputedStyle(innerRef.current);
+
+				setLoaderTextColor(refStyle.color);
+			}
+		}, [loading]);
+
 		const computedChildren =
 			loading && icon === undefined ? (
 				<>
 					<div
+						style={{ color: loaderTextColor }}
 						className={classNames(
 							"absolute inset-0 flex items-center justify-center transition duration-150"
 						)}
 					>
 						<ButtonIcon icon={<Spinner />} size={size} />
 					</div>
-					<div className="opacity-0">{children}</div>
+					{children}
 				</>
 			) : (
 				children
@@ -73,16 +95,19 @@ export const Button = React.forwardRef(
 		return (
 			<ButtonComponent
 				{...props}
-				ref={ref}
+				ref={innerRef}
 				disabled={disabled || loading}
 				className={classNames(
 					"flex items-center justify-center rounded border font-medium leading-none no-underline outline-none ring-offset-2 transition duration-150 focus:ring",
 					!disabled && styleClassName,
 					disabled && "cursor-not-allowed",
 					disabled && disabledClassName,
-					loading && icon === undefined && "relative",
 					sizeClassName,
-					className
+					className,
+					loaderTextColor !== undefined &&
+						loading &&
+						icon === undefined &&
+						"relative text-transparent"
 				)}
 			>
 				{iconPosition === "left" && (
