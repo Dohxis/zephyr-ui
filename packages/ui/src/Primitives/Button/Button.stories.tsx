@@ -46,6 +46,12 @@ export const Button = () => {
 						</ButtonComponent>
 					</div>
 				))}
+
+				<div className="flex space-x-2">
+					<ButtonComponent variant="solid" color="none">
+						Without color
+					</ButtonComponent>
+				</div>
 			</ExampleItem>
 
 			<ExampleItem title="Sizes">

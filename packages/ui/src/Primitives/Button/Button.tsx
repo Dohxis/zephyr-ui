@@ -15,7 +15,7 @@ export interface ButtonInterface<AsType extends React.ElementType> {
 	as?: AsType;
 	className?: ClassNameType;
 	variant?: ButtonVariantType;
-	color?: ButtonColorType;
+	color: ButtonColorType | "none";
 	size?: ButtonSizeType;
 	disabled?: boolean;
 	icon?: React.ReactElement;
@@ -52,7 +52,10 @@ export const Button = React.forwardRef(
 
 		const ButtonComponent = as || "button";
 
-		const styleClassName = BUTTON_STYLE_CLASS_NAMES[color][variant];
+		const styleClassName =
+			color === "none"
+				? "bg-white hover:bg-gray-100 text-gray-600 border-gray-300"
+				: BUTTON_STYLE_CLASS_NAMES[color][variant];
 
 		const sizeClassName = BUTTON_SIZE_CLASS_NAMES[size];
 

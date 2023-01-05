@@ -1,5 +1,5 @@
-import { Example, ExampleItem } from "../../Utilities/Storybook";
-import { Button } from "../Button/Button";
+import { Example, ExampleItem } from "../../../Utilities/Storybook";
+import { Button } from "../../Button/Button";
 import { Popover as PopoverComponent } from "./Popover";
 
 export default {
