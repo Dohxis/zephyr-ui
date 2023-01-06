@@ -8,7 +8,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				primary: defaultColors.indigo
+				primary: defaultColors.indigo,
 			},
 			fontFamily: {
 				sans: ["Inter var", ...defaultTheme.fontFamily.sans],
