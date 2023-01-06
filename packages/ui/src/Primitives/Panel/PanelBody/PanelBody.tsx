@@ -10,5 +10,5 @@ export const PanelBody: React.FunctionComponent<PanelBodyInterface> = ({
 	className,
 	children,
 }) => {
-	return <div className={classNames("px-3 pb-1", className)}>{children}</div>;
+	return <div className={classNames("px-3", className)}>{children}</div>;
 };
