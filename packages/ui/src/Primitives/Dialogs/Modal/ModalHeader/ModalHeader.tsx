@@ -1,29 +1,37 @@
+import { DialogHeading } from "ariakit";
 import React from "react";
-import { classNames, ClassNameType } from "../../../Utilities/ClassName";
+import { classNames, ClassNameType } from "../../../../Utilities/ClassName";
+import { ModalCloseButton } from "../ModalCloseButton/ModalCloseButton";
 
-interface PanelHeaderInterface {
+interface ModalHeaderInterface {
 	title: React.ReactNode;
 	titleClassName?: ClassNameType;
 	description?: React.ReactNode;
 	descriptionClassName?: ClassNameType;
 	className?: ClassNameType;
+	closeButton?: boolean;
 	children?: React.ReactNode;
 }
 
-export const PanelHeader: React.FunctionComponent<PanelHeaderInterface> = ({
+export const ModalHeader: React.FunctionComponent<ModalHeaderInterface> = ({
 	title,
 	titleClassName,
 	description,
 	descriptionClassName,
 	className,
+	closeButton = true,
 	children,
 }) => {
+	const shouldMountChildrenContainer = children || closeButton;
+
 	return (
 		<div className="flex px-3">
 			<div className="flex-grow">
-				<h1 className={classNames("text-gray-800", titleClassName)}>
+				<DialogHeading
+					className={classNames("text-gray-800", titleClassName)}
+				>
 					{title}
-				</h1>
+				</DialogHeading>
 
 				{description && (
 					<p
@@ -37,9 +45,10 @@ export const PanelHeader: React.FunctionComponent<PanelHeaderInterface> = ({
 				)}
 			</div>
 
-			{children && (
+			{shouldMountChildrenContainer && (
 				<div className={classNames("flex items-center", className)}>
 					{children}
+					{closeButton && <ModalCloseButton />}
 				</div>
 			)}
 		</div>
