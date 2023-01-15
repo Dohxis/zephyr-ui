@@ -26,6 +26,8 @@
 		"build:storybook": "yarn build:tailwind --minify && storybook build -o www --quiet",
 		"build:tailwind": "tailwind -i ./.storybook/index.css -o ./.storybook/index.generated.css",
 		"start": "concurrently -k \"yarn build:tailwind --watch\" \"storybook dev -p 6006 --quiet\"",
+		"test": "yarn build:tailwind --minify && cypress run --component --browser chrome",
+		"cypress:open": "cypress open --component --browser chrome",
 		"lint": "eslint src",
 		"lint:fix": "eslint --fix src"
 	},
@@ -47,6 +49,7 @@
 		"@typescript-eslint/parser": "^5.47.1",
 		"@vitejs/plugin-react": "^3.0.0",
 		"concurrently": "^7.1.0",
+		"cypress": "^12.3.0",
 		"eslint": "^8.7.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-react": "^7.28.0",
