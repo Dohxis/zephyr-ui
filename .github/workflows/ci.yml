@@ -1,0 +1,26 @@
+name: Zephyr CI
+
+on: [push]
+
+jobs:
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Install dependencies
+              run: yarn install
+            - name: Build
+              run: yarn build
+            - name: Lint
+              run: yarn lint
+    test:
+        name: Test
+        runs-on: ubuntu-latest
+        container: cypress/browsers:node16.17.0-chrome106
+        steps:
+            - uses: actions/checkout@v3
+            - name: Install dependencies
+              run: yarn install
+            - name: Test
+              run: yarn test
